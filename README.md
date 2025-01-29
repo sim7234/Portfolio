@@ -1,5 +1,7 @@
 # Portfolio
 My Portfolio
+
+This is a example of a dropdown
 <details>
 <summary>Example</summary>
 <pre>$ using System;
