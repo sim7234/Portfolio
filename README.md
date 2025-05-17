@@ -234,19 +234,12 @@ public class SaveContainer
 
 
 
-# Portfolio
-
-My Portfolio
-
-
-
-
 
 This is a example of a dropdown
 
 <details>
 
-<summary>Example</summary>
+<summary></summary>
 
 <pre>$
 
@@ -254,7 +247,7 @@ This is a example of a dropdown
 Test
 
 
-    <br>a code block!</pre>
+    <br></pre>
 </details>
 
 
