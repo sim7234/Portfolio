@@ -238,17 +238,16 @@ public class SaveContainer
 This is a 8 week 3D school project i was a part of
 (https://yrgo-game-creator.itch.io/signal-in-progress)
 
-<summary>Description</summary>
-
-<pre>$
-
-
+<details>
+<summary>Game Descripion</summary>
 It is a horror game where two monsters are trying to get in to your room,
 you have to keep them out while sending a SOS signal, this is done by playing minigames.
-
-
-    <br></pre>
 </details>
+
+
+
+
+
 
 What i worked on:
 Minigames:
