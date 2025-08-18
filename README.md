@@ -265,7 +265,6 @@ I worked on 3 different minigames in this project.
 
         <summary>Code:<summary>
 
-            <pre>$
                 <br></pre>
         </details>
 
