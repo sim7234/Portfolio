@@ -1,7 +1,7 @@
 # Portfolio
 My Portfolio
 
-This is a example of a dropdown
+Code for online mobile game based on firebase, level builder.
 <details>
 <summary>Example</summary>
 <pre>$ using System;
@@ -250,16 +250,24 @@ you have to keep them out while sending a SOS signal, this is done by playing mi
 
 
 What i worked on:
-Minigames:
 <details>
 
-<summary></summary>
+<summary>Minigames:</summary>
 
 <pre>$
 
 
-Test
+I worked on 3 different minigames in this project.
 
+    Skill check: This minigame had a circle with a spinning arrow in the middle, the player had to time the arrow with a randomly selected point on the circle.
+
+    <details>
+
+        <summary>Code:<summary>
+
+            <pre>$
+                <br></pre>
+        </details>
 
     <br></pre>
 </details>
