@@ -254,8 +254,6 @@ What i worked on:
 
 <summary>Minigames:</summary>
 
-<pre>$
-
 
 I worked on 3 different minigames in this project.
 
