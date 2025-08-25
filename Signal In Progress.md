@@ -84,8 +84,6 @@ This minigame's job is to reset the monster upon completion and it has gone thro
     }
 }
 ```
-    </pre>
-</details>
 
 
 * Hammer nails minigame
