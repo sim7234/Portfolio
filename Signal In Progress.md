@@ -14,9 +14,9 @@ This minigame's job is to reset the monster upon completion and it has gone thro
 
 <details>
 <summary>SkillCheck detection code</summary>
-```C#
+```CS
         
-        bool CheckIfHitZone()
+bool CheckIfHitZone()
 {
     float skillZonePositionMin = 0;
     float skillZonePositionMax = 0;
