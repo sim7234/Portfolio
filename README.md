@@ -1,7 +1,8 @@
 # [Signal In Progress](https://github.com/sim7234/Portfolio/blob/main/Signal%20In%20Progress.md) <-- Click to learn more! 
-* A 3D School group project, April 2025 - June 2025
+* School group project, April 2025 - June 2025
 * Engine: Unity
 * Genre: 3D, Horror, Minigames
+* 4 Programmers and 2 artists
     
 
 <img width="1213" height="678" alt="Signal in progress main menu" src="https://github.com/user-attachments/assets/1135fb28-9713-49e0-9f9f-cc7c52f8a762" />
