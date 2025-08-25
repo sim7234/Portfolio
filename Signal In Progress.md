@@ -16,9 +16,8 @@ This minigame's job is to reset the monster upon completion and it has gone thro
 
 <summary>Code: Detecting hit skillchecks</summary>
 
-<pre>
-
-    <pbr>
+<details>
+<summary>SkillCheck detection code</summary>
 ```C#
         bool CheckIfHitZone()
 {
