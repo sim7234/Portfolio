@@ -3,15 +3,18 @@
 * Engine: Unity
 * Genre: 3D, Horror, Minigames
 * 4 Programmers and 2 artists
-    
 
-<img width="1213" height="678" alt="Signal in progress main menu" src="https://github.com/user-attachments/assets/1135fb28-9713-49e0-9f9f-cc7c52f8a762" />
+<table>
+  <tr>
+    <td ><img src="Signal_In_Progress\MainMenu.png"/></td>
+  </tr>
+</table>
 
 <details>
 
 <summary>Minigames:</summary>
 
-<pre>$
+<pre>
 
     <pbr></pre>
 </details>
