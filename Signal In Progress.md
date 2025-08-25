@@ -14,7 +14,8 @@ This minigame's job is to reset the monster upon completion and it has gone thro
 
 <details>
 <summary>SkillCheck detection code</summary>
-```CS
+        
+```csharp
         
 bool CheckIfHitZone()
 {
@@ -84,6 +85,6 @@ bool CheckIfHitZone()
     }
 }
 ```
-
+</details>
 
 * Hammer nails minigame
