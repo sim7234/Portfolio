@@ -16,7 +16,7 @@ This minigame's job is to reset the monster upon completion and it has gone thro
 
 <summary>Code: Detecting hit skillchecks</summary>
 
-<pre>$
+<pre>
 
     <pbr>
 ```CS
