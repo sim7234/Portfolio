@@ -18,7 +18,7 @@ This minigame's job is to reset the monster upon completion and it has gone thro
 
 <pre>$
 
-    <pbr>bool CheckIfHitZone()
+    <pbr>```CS bool CheckIfHitZone()
 {
     float skillZonePositionMin = 0;
     float skillZonePositionMax = 0;
@@ -84,7 +84,7 @@ This minigame's job is to reset the monster upon completion and it has gone thro
     {
         return false;
     }
-}</pre>
+}```</pre>
 </details>
 
 
