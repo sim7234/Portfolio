@@ -8,7 +8,10 @@
 * Helped with getting art properly integrated, including animations.
 
 * Skillcheck minigame
-![Unity_qHTh1048mZ-ezgif com-optimize](https://github.com/user-attachments/assets/0c35b6dc-7667-4b03-ac3a-aedb9acad41e)
+
+<td ><img src="Signal_In_Progress\SkillCheckGif.gif"/></td>
+
+
 
 This minigame's job is to reset the monster upon completion and it has gone through many itterations,
 

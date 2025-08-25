@@ -10,15 +10,6 @@
   </tr>
 </table>
 
-<details>
-
-<summary>Minigames:</summary>
-
-<pre>
-
-    <pbr></pre>
-</details>
-
 
 
     
