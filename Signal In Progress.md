@@ -1,5 +1,6 @@
 # Signal In Progress : [Back](https://github.com/sim7234/Portfolio/blob/main/README.md) <-- Click to go back.
-<img width="1080" height="678" alt="Signal in progress main menu" src="https://github.com/user-attachments/assets/49aa1f66-fc5f-4cfc-a390-1fbefac2e23e" />
+<img width="512" height="
+" alt="Signal in progress main menu" src="Signal_In_Progress\MainMenu.png" />
 
 # What i worked on
 * Minigames: A core part of the gameplay is minigames and i worked on two of them,
@@ -13,7 +14,7 @@
 
 
 
-This minigame's job is to reset the monster upon completion and it has gone through many itterations,
+This minigame's job is to reset the monster upon completion and it has gone through many itterations.
 
 <details>
 <summary>SkillCheck detection code</summary>
