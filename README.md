@@ -3,6 +3,9 @@
 * Engine: Unity
 * Genre: 3D, Horror, Minigames
 * 4 Programmers and 2 artists
+Signal In Progress is a 3D Horror game where the player is stuck in an abandoned labratory with lurking monsters that's trying to get in.
+
+Prioritize one of three minigames to survive.
 
 <table>
   <tr>

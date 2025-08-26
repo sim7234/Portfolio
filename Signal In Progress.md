@@ -2,8 +2,13 @@
 <img width="512" height="
 " alt="Signal in progress main menu" src="Signal_In_Progress\MainMenu.png" />
 
+* School group project, April 2025 - June 2025
+* Engine: Unity
+* Genre: 3D, Horror, Minigames
+* 4 Programmers and 2 artists
+
 # What i worked on
-* Minigames: A core part of the gameplay is minigames and i worked on two of them,
+* Minigames: A core part of the gameplay is minigames and i worked on two of them.
 * Connecting different scripts to work together in a cohesive way.
 * Patching problems and smoothing out gameplay where needed.
 * Helped with getting art properly integrated, including animations.
