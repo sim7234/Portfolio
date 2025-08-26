@@ -5,7 +5,8 @@ Prioritize one of three minigames to survive.
 
 <table>
   <tr>
-    <td ><img src="Signal_In_Progress\MainMenu.png"/></td>
+    <td ><img width="512" height="
+" src="Signal_In_Progress\MainMenu.png"/></td>
   </tr>
 </table>
 
