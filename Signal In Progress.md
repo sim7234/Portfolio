@@ -21,6 +21,8 @@
 
 This minigame's job is to reset the monster upon completion and it has gone through many itterations.
 
+I started with figuring out how to detect when a rotating arrow hits a zone inside a circle,
+
 <details>
 <summary>SkillCheck detection code</summary>
         
@@ -97,3 +99,5 @@ bool CheckIfHitZone()
 </details>
 
 * Hammer nails minigame
+
+<td ><img src="Signal_In_Progress\HammerGif.gif"/></td>

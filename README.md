@@ -10,6 +10,6 @@ Prioritize one of three minigames to survive.
   </tr>
 </table>
 
+### Overview
 
-
-    
+Goal: Make a fun 3D horror game with my class mates with the concept of Sending a SoS signal while being distracted by a monster and minigames.
