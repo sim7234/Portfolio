@@ -45,12 +45,15 @@ Goal: I was learning Unreal Engine and Visual scripting for the first time, i wa
 
 My Contributions: This is an entirely self made project, i made all the code, the good and the bad.
 
+## Side Project 
+
 <table>
   <tr>
     <td ><img width="512" height="
 " src="ChaosShooter\Fighting.gif"/></td>
   </tr>
 </table>
+
 
 <table>
   <tr>
