@@ -18,6 +18,13 @@ My Contributions: I worked extensivly on two of the three minigames and itterate
 I also worked on interaction for the player with everything around the map.
 
 
+# Unreal Engine Project
+
+I did not name this project but i think a name is deserved so i will be calling it "Speed Streak".
+
+Speed Streak is a first person Parkour/speed running game where the main inspiration is Titanfall 2.
+
+
 <table>
   <tr>
     <td ><img width="512" height="
@@ -31,3 +38,9 @@ I also worked on interaction for the player with everything around the map.
 " src="Unreal\UnrealRun.gif"/></td>
   </tr>
 </table>
+
+### Overview
+
+Goal: I was learning Unreal Engine and Visual scripting for the first time, i was really hooked on the idea of making a high quality movement runner game as i love the wall running and double jump mechanics in Titanfall 2 but would rather not deal with anything related to aiming while running on walls.
+
+My Contributions: This is an entirely self made project, i made all the code, the good and the bad.
