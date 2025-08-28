@@ -44,3 +44,17 @@ Speed Streak is a first person Parkour/speed running game where the main inspira
 Goal: I was learning Unreal Engine and Visual scripting for the first time, i was really hooked on the idea of making a high quality movement runner game as i love the wall running and double jump mechanics in Titanfall 2 but would rather not deal with anything related to aiming while running on walls.
 
 My Contributions: This is an entirely self made project, i made all the code, the good and the bad.
+
+<table>
+  <tr>
+    <td ><img width="512" height="
+" src="ChaosShooter\Fighting.gif"/></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td ><img width="512" height="
+" src="ChaosShooter\PerkCreation.gif"/></td>
+  </tr>
+</table>
