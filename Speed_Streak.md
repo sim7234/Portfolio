@@ -10,22 +10,23 @@
 " src="Unreal\level1.png"/></td>
 
 ## Goal:
-To make a mechanic where i can wall run like Titanfall 2 together with as smooth movement i could make.
+To make a game with smooth responsive movement with wall running capability inspired by Titanfall 2.
 
-How i started: I began by figuring out how custom movement would work in unreal, i made a simple ground slide by pushing the player forward, then a downwards slide by altering gravity and friction, a simple sprint that doubles movement speed when pressed that i show below. 
+How i started: I began by figuring out how custom movement would work in unreal, i made a simple ground slide by pushing the player forward, then a downwards slide by altering gravity and friction.
 
 
-<td ><img width="512" height="
-" src="Unreal\SprintFunction.png"/></td>
 
-It is wierdly enough harder to show unreals visual code here so i will only show two simple functions i made.
 
 
 <td ><img width="512" height="
-" src="Unreal\SlopeCheck.png"/></td>
+" src="Unreal\UnrealGroundSlide.png"/></td>
 
-What i would do differently: Now that i have a better understanding of unreal and blueprints i would start by splitting code up in different functions and especially in *different scripts*, yup i put everything in the same blueprint because i did not wanna connect different blueprints in unreal at the same time im trying to figure out how to make the player smoothly slide down and then up a slope.
+### Problems and solutions <br>
+The first major problem for this project had to do with sliding down slopes, or more specifically going down then up a slope, as i used the normal of the ground underneeth the player to calculate how much gravity to apply, this made going up a slope impossible and instantly stopped any sliding as if the player hit a wall.
 
-I could also potentially gone into C++ a bit to make the slope calculations, not sure if that would be better though.
+Problem solving: So i thought about how to solve this problem, and decided on trying to predict when a player is about to go up a slope with the help of raycast that points towards the players velocity. <br>
 
-In the end i am still proud of what i have made here, the game is very fun to play for me and for other people in my class.
+ Then i preempivly set the players gravity to default so they could slide up the slope without issues and still slow down.
+
+ <td ><img width="512" height="
+" src="Unreal\UnrealNormals.png"/></td>
