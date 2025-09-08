@@ -1,4 +1,4 @@
-# [Signal In Progress](https://github.com/sim7234/Portfolio/blob/main/Signal%20In%20Progress.md) <-- Click to learn more! 
+## [Signal In Progress](https://github.com/sim7234/Portfolio/blob/main/Signal%20In%20Progress.md) <-- Click to learn more! 
 Signal In Progress is a 3D Horror game where the player is stuck in an abandoned labratory with lurking monsters that's trying to get in.
 
 Prioritize one of three minigames to survive.
@@ -18,7 +18,7 @@ My Contributions: I worked extensivly on two of the three minigames and itterate
 I also worked on interaction for the player with everything around the map.
 
 
-# [Speed Streak](https://github.com/sim7234/Portfolio/blob/main/Speed_Streak.md) <-- Click to learn
+## [Speed Streak](https://github.com/sim7234/Portfolio/blob/main/Speed_Streak.md) <-- Click to learn more!
 
 Speed Streak is a first person Parkour/speed running game where the main inspiration is Titanfall 2.
 It is made in Unreal Engine 5.
@@ -44,7 +44,11 @@ Goal: I was learning Unreal Engine and Visual scripting for the first time, i wa
 
 My Contributions: This is an entirely self made project, i made all the code, the good and the bad.
 
-## [2D Shooter Side Project ](https://github.com/sim7234/Portfolio/blob/main/2DShooter.md) 
+## [2D Shooter Side Project ](https://github.com/sim7234/Portfolio/blob/main/2DShooter.md) <-- Click to learn more!
+
+### Overview
+
+A 2D top down shooter with lots of perks and chaos, this is my personal side project where i experimented with a custom perk creation system that allows for easy creation of perks with lots of customizablity with the help of scriptable objects.
 
 <table>
   <tr>
@@ -54,7 +58,9 @@ My Contributions: This is an entirely self made project, i made all the code, th
 </table>
 
 
-## [Angry Ball](https://github.com/sim7234/Portfolio/blob/main/AngryBall.md) 
+## [Angry Ball](https://github.com/sim7234/Portfolio/blob/main/AngryBall.md) <-- Click to learn more!
+
+A mobile angry birds type game i worked on solo for 5 weeks, this game is connected to Firebase and has a level builder that allows you to save the level for other users to play.
 
 <table>
   <tr>
@@ -70,7 +76,9 @@ My Contributions: This is an entirely self made project, i made all the code, th
   </tr>
 </table>
 
-## [Sun Seed](https://github.com/sim7234/Portfolio/blob/main/SunSeed.md) 
+## [Sun Seed](https://github.com/sim7234/Portfolio/blob/main/SunSeed.md) <-- Click to learn more!
+
+A 2D Asymetric game i worked on for 6 weeks in a group of 3 programmers and 4 artists, the game is a local co-op melee PvE game with levels the players need to complete.
 
 <table>
   <tr>
