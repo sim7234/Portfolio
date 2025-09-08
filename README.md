@@ -44,7 +44,7 @@ Goal: I was learning Unreal Engine and Visual scripting for the first time, i wa
 
 My Contributions: This is an entirely self made project, i made all the code, the good and the bad.
 
-## Side Project 
+## 2D Shooter Side Project 
 
 <table>
   <tr>
@@ -67,5 +67,12 @@ My Contributions: This is an entirely self made project, i made all the code, th
   <tr>
     <td ><img width="512" height="
 " src="AngryBall\LevelGif.gif"/></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td ><img width="512" height="
+" src="SunSeed\SunSeedHub.png"/></td>
   </tr>
 </table>
