@@ -44,7 +44,7 @@ Goal: I was learning Unreal Engine and Visual scripting for the first time, i wa
 
 My Contributions: This is an entirely self made project, i made all the code, the good and the bad.
 
-## 2D Shooter Side Project 
+## [2D Shooter Side Project ](https://github.com/sim7234/Portfolio/blob/main/2DShooter.md) 
 
 <table>
   <tr>
@@ -54,7 +54,7 @@ My Contributions: This is an entirely self made project, i made all the code, th
 </table>
 
 
-# Angry Ball
+## [Angry Ball](https://github.com/sim7234/Portfolio/blob/main/AngryBall.md) 
 
 <table>
   <tr>
@@ -69,6 +69,8 @@ My Contributions: This is an entirely self made project, i made all the code, th
 " src="AngryBall\LevelGif.gif"/></td>
   </tr>
 </table>
+
+## [Sun Seed](https://github.com/sim7234/Portfolio/blob/main/SunSeed.md) 
 
 <table>
   <tr>
