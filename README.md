@@ -54,13 +54,6 @@ My Contributions: This is an entirely self made project, i made all the code, th
 </table>
 
 
-<table>
-  <tr>
-    <td ><img width="512" height="
-" src="ChaosShooter\PerkCreation.gif"/></td>
-  </tr>
-</table>
-
 # Angry Ball
 
 <table>
