@@ -10,6 +10,9 @@ Prioritize one of three minigames to survive.
   </tr>
 </table>
 
+
+<td ><img width="512" height="" src="Signal_In_Progress\SkillCheckGif.gif"/></td>
+
 ### Overview
 
 Goal: Make a fun 3D horror game with my class mates with the concept of Sending a SoS signal while being distracted by a monster and minigames.
@@ -78,7 +81,7 @@ A mobile angry birds type game i worked on solo for 5 weeks, this game is connec
 
 ## [Sun Seed](https://github.com/sim7234/Portfolio/blob/main/SunSeed.md) <-- Click to learn more!
 
-A 2D Asymetric game i worked on for 6 weeks in a group of 3 programmers and 4 artists, the game is a local co-op melee PvE game with levels the players need to complete.
+A 2D asymmetric game i worked on for 6 weeks in a group of 3 programmers and 4 artists, the game is a local co-op melee PvE game with levels the players need to complete.
 
 <table>
   <tr>
