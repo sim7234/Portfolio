@@ -11,7 +11,7 @@ Prioritize one of three minigames to survive.
 </table>
 
 
-<td ><img width="512" height="" src="Signal_In_Progress\SkillCheckGif.gif"/></td>
+<td ><img width="512" height="" src="Signal_In_Progress\GameOver.gif"/></td>
 
 ### Overview
 

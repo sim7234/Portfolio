@@ -5,7 +5,7 @@
 * School group project, April 2025 - June 2025
 * Engine: Unity
 * Genre: 3D, Horror, Minigames
-* 4 Programmers and 2 artists
+* 4 programmers and 2 artists
 
 Download:
 https://yrgo-game-creator.itch.io/signal-in-progress
@@ -16,10 +16,9 @@ https://yrgo-game-creator.itch.io/signal-in-progress
 * Patching problems and smoothing out gameplay where needed.
 * Helped with getting art properly integrated, including animations.
 
-* Skillcheck minigame
+### How i made the skillcheck minigame
 
-### How it started
->Originally i started making a base script for all minigames, it was supposed to handle all common functionality, like interaction, Sucess and failure detection, and at the time camera positioning. After many reworks of the script due to game design changes it was eventually scrapped as each minigame became to distinct to justify keeping a base script.
+Originally i started making a base script for all minigames, it was supposed to handle all common functionality, like interaction, sucess and failure detection, and at the time camera positioning. After many reworks of the script due to game design changes it was eventually scrapped as each minigame became to distinct to justify keeping a base script.
 
 
 <td ><img src="Signal_In_Progress\SkillCheckGif.gif"/></td>
@@ -28,10 +27,10 @@ https://yrgo-game-creator.itch.io/signal-in-progress
 #### This minigame's job is to reset the monster upon completion and it has gone through many itterations.
 
 
-### Thought process first minigame
->I started with figuring out how to detect when a rotating arrow hits a zone inside a circle, at the time we had no need to allow the skill check to appear anywhere so i settled on 4 locations and allowing its size to randomly go clockwise or counterclockwise which allows for 8 different configurations, togheter with a size variance this felt good enough.
+### Thought process
+I started with figuring out how to detect when a rotating arrow hits a zone inside a circle, at the time we had no need to allow the skill check to appear anywhere so i settled on 4 locations and allowing its size to randomly go clockwise or counterclockwise which allows for 8 different configurations, together with a size variance this felt good enough.
 
->All though if i remade it today i would allow for the zone to appear anywhere on the circle except the first and last ~30 degrees.
+All though if i remade it today i would allow for the zone to appear anywhere on the circle except the first and last ~30 degrees.
 
 <details>
 
@@ -139,7 +138,7 @@ void RandomizeFillOrigin()
 ```
 </details>
 
-* Hammer nails minigame
+### The second minigame, hammer nails
 
 <td ><img src="Signal_In_Progress\HammerGif.gif"/></td>
 
@@ -147,12 +146,11 @@ void RandomizeFillOrigin()
 
 ### Though process second minigame
 
-> At the start of the project this was supposed to be a base script for a "press button" type minigame, where other minigames could inherit the functionality mouse press detection, click amount and if a button could decrease its clicked amount over time.
+At the start of the project this was supposed to be a base script for a "press button" type minigame, where other minigames could inherit the functionality of mouse press detection, click amount and if a button could decrease its clicked amount over time.
 
->This worked well in the beginning but over time with game design changes the script was changed from a base class to a single minigame "Hammer nails", which was also made into a hull for the monster to attack.
+ This worked well in the beginning, but over time with game design changes the script was changed from a base class to a single minigame "Hammer nails", which was also made into a hull for the monster to attack.
 
-With time running out and mutliple scripts being reworked that was connected to this minigame we mostly made the decision to make the code *work* instead of being the most readable, something we all came to regret, but we made it work with no noticable bugs or performance problems.
-
+Functionality wise i started by 
 <details>
 
 <summary>Nail hit functionality</summary>
@@ -210,9 +208,13 @@ void ClickOnObject(GameObject target)
 
 
         if (AudioManager.Instance is not null && clickable.nailHealth != nailMaxHP)
-            AudioManager.Instance.PlayAudioClip(transform.position, "Hammer", "2D", true, 0.08f, rndPitch);
+        {
+             AudioManager.Instance.PlayAudioClip(transform.position, "Hammer", "2D", true, 0.08f, rndPitch);
+        } 
         else if (AudioManager.Instance is not null && clickable.nailHealth == nailMaxHP)
+        {
             AudioManager.Instance.PlayAudioClip(transform.position, "Hammer", "2D", true, 0.13f, rndPitch);
+        }
     }
 
   ```
