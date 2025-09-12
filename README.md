@@ -1,5 +1,5 @@
 ## [Signal In Progress](https://github.com/sim7234/Portfolio/blob/main/Signal%20In%20Progress.md) <-- Click to learn more! 
-Signal In Progress is a 3D Horror game where the player is stuck in an abandoned labratory with lurking monsters that's trying to get in.
+Signal In Progress is a 3D Horror game where the player is stuck in an abandoned laboratory with lurking monsters that's trying to get in.
 
 Prioritize one of three minigames to survive.
 
@@ -17,7 +17,7 @@ Prioritize one of three minigames to survive.
 
 Goal: Make a fun 3D horror game with my class mates with the concept of Sending a SoS signal while being distracted by a monster and minigames.
 
-My Contributions: I worked extensivly on two of the three minigames and itterated or completly reworked scripts as needed all around the project.
+My Contributions: I worked extensively on two of the three minigames and iterated or completely reworked scripts as needed all around the project.
 I also worked on interaction for the player with everything around the map.
 
 
@@ -51,7 +51,7 @@ My Contributions: This is an entirely self made project, i made all the code, th
 
 ### Overview
 
-A 2D top down shooter with lots of perks and chaos, this is my personal side project where i experimented with a custom perk creation system that allows for easy creation of perks with lots of customizablity with the help of scriptable objects.
+A 2D top down shooter with lots of perks and chaos, this is my personal side project where i experimented with a custom perk creation system that allows for easy creation of perks with lots of customizability with the help of scriptable objects.
 
 <table>
   <tr>

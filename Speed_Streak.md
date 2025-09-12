@@ -22,11 +22,11 @@ How i started: I began by figuring out how custom movement would work in unreal,
 " src="Unreal\UnrealGroundSlide.png"/></td>
 
 ### Problems and solutions <br>
-The first major problem for this project had to do with sliding down slopes, or more specifically going down then up a slope, as i used the normal of the ground underneeth the player to calculate how much gravity to apply, this made going up a slope impossible and instantly stopped any sliding as if the player hit a wall.
+The first major problem for this project had to do with sliding down slopes, or more specifically going down then up a slope, as i used the normal of the ground underneath the player to calculate how much gravity to apply, this made going up a slope impossible and instantly stopped any sliding as if the player hit a wall.
 
 Problem solving: So i thought about how to solve this problem, and decided on trying to predict when a player is about to go up a slope with the help of raycast that points towards the players velocity. <br>
 
- Then i preempivly set the players gravity to default so they could slide up the slope without issues and still slow down.
+ Then i preemptively set the players gravity to default so they could slide up the slope without issues and still slow down.
 
  <td ><img width="512" height="
 " src="Unreal\UnrealNormals.png"/></td>

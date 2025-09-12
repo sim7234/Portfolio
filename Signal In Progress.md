@@ -18,7 +18,7 @@ https://yrgo-game-creator.itch.io/signal-in-progress
 
 ### How i made the skillcheck minigame
 
-Originally i started making a base script for all minigames, it was supposed to handle all common functionality, like interaction, sucess and failure detection, and at the time camera positioning. After many reworks of the script due to game design changes it was eventually scrapped as each minigame became to distinct to justify keeping a base script.
+Originally i started making a base script for all minigames, it was supposed to handle all common functionality, like interaction, success and failure detection, and at the time camera positioning. After many reworks of the script due to game design changes it was eventually scrapped as each minigame became to distinct to justify keeping a base script.
 
 
 <td ><img src="Signal_In_Progress\SkillCheckGif.gif"/></td>
