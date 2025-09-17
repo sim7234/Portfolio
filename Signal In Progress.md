@@ -7,8 +7,9 @@
 * Genre: 3D, Horror, Minigames
 * 4 programmers and 2 artists
 
-Download:
-https://yrgo-game-creator.itch.io/signal-in-progress
+Itch: https://yrgo-game-creator.itch.io/signal-in-progress
+
+Trailer: https://www.youtube.com/watch?v=kN2xbXOnlaE
 
 # What i worked on
 * Minigames: A core part of the gameplay is minigames and i worked on two of them.
@@ -108,6 +109,8 @@ bool CheckIfHitZone()
 ```
 </details>
 
+<br>
+
 <details>
 <summary>Zone selection Code</summary>
         
@@ -150,7 +153,6 @@ At the start of the project this was supposed to be a base script for a "press b
 
  This worked well in the beginning, but over time with game design changes the script was changed from a base class to a single minigame "Hammer nails", which was also made into a hull for the monster to attack.
 
-Functionality wise i started by 
 <details>
 
 <summary>Nail hit functionality</summary>
@@ -220,3 +222,168 @@ void ClickOnObject(GameObject target)
   ```
   
   </details>
+
+<br>
+
+Another functionality that we added to the game is objective highlighting, in case the player was not doing an objective for a long time we put outlines around the objectives, here is the code i wrote for that functionality:
+
+<td ><img width="512" height="" src="Signal_In_Progress\ObjectiveHighlight.png"/></td>
+
+<details>
+
+<summary>Objective Highlighting</summary>
+
+``` CSharp
+
+using System;
+using UnityEngine;
+
+public class ObjectiveHighlighter : MonoBehaviour
+{
+    float timeSinceElectrical;
+    float timeSinceComputer;
+
+    bool shouldDoElectrical;
+    bool shouldDoComputer;
+
+    bool isMonsterActive;
+    bool isElectricalOnCooldown;
+
+    [SerializeField] private SkillCheckCircleMinigame electricalScript;
+    [SerializeField] private Outline electricalOutline;
+
+    [SerializeField] private Outline computerOutline;
+
+    MonsterModule monsterModule;
+    SOSModule sosModule;
+    UIMessage uiMessage;
+
+    [SerializeField] private float timeTillElectricalReminder = 45;
+    [SerializeField] private float timeTillComputerReminder = 45;
+
+    public event Action EShouldUsePC;
+    public event Action EShouldUseElectrical;
+
+    private bool sentPCSingal;
+    private bool sentElectricalSignal;
+
+    private void Start()
+    {
+        monsterModule = ServiceLocator.Instance.Get<MonsterModule>();
+        sosModule = ServiceLocator.Instance.Get<SOSModule>();
+        uiMessage = ServiceLocator.Instance.Get<UIMessage>();
+
+        SkillCheckCircleMinigame.EElectricalMinigameComplete -= OnCompletedElectrical;
+        SkillCheckCircleMinigame.EElectricalMinigameComplete += OnCompletedElectrical;
+
+        sosModule.EInteracted -= OnInteractedComputer;
+        sosModule.EInteracted += OnInteractedComputer;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        SetBoolConditions();
+
+        CheckIfShouldDoElectrical();
+
+        StartOutlines();
+    }
+
+    void SetBoolConditions()
+    {
+        if (electricalScript.cooldownTimer > 0)
+        {
+            isElectricalOnCooldown = true;
+        }
+        else
+        {
+            isElectricalOnCooldown = false;
+        }
+
+        if (monsterModule.presentMonsters > 0)
+        {
+            isMonsterActive = true;
+        }
+        else
+        {
+            isMonsterActive = false;
+        }
+    }
+
+    void CheckIfShouldDoElectrical()
+    {
+        if (isMonsterActive == true && isElectricalOnCooldown == false)
+        {
+            timeSinceElectrical += Time.deltaTime;
+
+            if (timeSinceElectrical > timeTillElectricalReminder)
+            {
+                shouldDoElectrical = true;
+                if (sentElectricalSignal == false)
+                {
+                    EShouldUseElectrical?.Invoke();
+                    sentElectricalSignal = true;
+                    uiMessage.EnqueueUIMessage(messageType.playerTip, "I need to scare them away somehow..", 6, true);
+                }
+            }
+
+            shouldDoComputer = false;
+            if (timeSinceComputer > timeTillComputerReminder)
+            {
+                timeSinceComputer = timeTillComputerReminder / 2;
+            }
+        }
+        else if (isMonsterActive == false)
+        {
+            timeSinceComputer += Time.deltaTime;
+
+            if (timeSinceComputer > timeTillComputerReminder)
+            {
+                shouldDoComputer = true;
+                if (sentPCSingal == false)
+                {
+                    EShouldUsePC?.Invoke();
+                    sentPCSingal = true;
+                    uiMessage.EnqueueUIMessage(messageType.playerTip, "I need get help somehow..", 6, true);
+                }
+            }
+            else
+            {
+                shouldDoComputer = false;
+            }
+        }
+    }
+
+    void OnCompletedElectrical()
+    {
+        shouldDoElectrical = false;
+        timeSinceElectrical = 0;
+        sentElectricalSignal = false;
+    }
+
+    void OnInteractedComputer()
+    {
+        shouldDoComputer = false;
+        timeSinceComputer = 0;
+        sentPCSingal = false;
+    }
+
+    void StartOutlines()
+    {
+        if (shouldDoElectrical == true)
+        {
+            electricalOutline.enabled = true;
+        }
+
+        if (shouldDoComputer == true)
+        {
+            computerOutline.enabled = true;
+        }
+    }
+}
+
+```
+
+</details>
+<br>

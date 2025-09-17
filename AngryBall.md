@@ -15,7 +15,7 @@ After making a simple angry birds clone i started with the level builder, i bega
  After learning how that works i had to decide what data to store, after much trial and error and thinking i got to storing a Vector4, x and y for position, z for block ID and w for the blocks rotation on 1 axis and i simply made an array for that and stored each block in the level editor in json format. <br>
 
 
-Here is the script on how i handeled save data.
+Here is the script on how i handled save data.
 <details>
 
 <summary>SaveData script</summary>
@@ -180,3 +180,98 @@ public class SaveContainer
 ```
 
 </details>
+
+<br>
+
+Another function i spent some extra time on was the trajectory line that shows where the ball is going to land.
+I stated with using physics simulations about 100 - 1000 ticks into the future to get a perfectly accurate trajectory, this was incredibly accurate and satisfying to use, it was also very laggy and came with a few bugs so i decided to scrap that.
+
+ Instead i googled and found some math i could use for my trajectory, so i did what any great programer does, i copied and pasted it into my own script, then just tweaked it a bit to fit my needs and bam i got a working trajectory.
+
+<details>
+
+<summary> Trajectory line </summary>
+
+``` CSharp
+
+using UnityEngine;
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(LineRenderer))]
+public class Trajectory : MonoBehaviour
+{
+    private Rigidbody2D rb;
+    private LineRenderer lineRenderer;
+
+    private int steps = 1400;
+
+    private Vector2[] linePos;
+
+    private Camera cam;
+
+    [SerializeField] private PhysicsMaterial2D PMaterial2D;
+    [SerializeField] private bool doGroundBounce;
+
+    private float defaultGravityScale;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.positionCount = steps;
+        linePos = new Vector2[steps];
+        cam = Camera.main;
+        defaultGravityScale = rb.gravityScale;
+    }
+
+    public void CalculateTrajectory(Vector2 totalForce)
+    {
+        float timeStep = Time.fixedDeltaTime / Physics2D.velocityIterations;
+
+        Vector2 gravityAccel = Physics2D.gravity * defaultGravityScale * timeStep * timeStep;
+
+        Vector2 velocity = totalForce;
+
+        Vector2 pos = transform.position;
+
+        float drag = 1f - timeStep * rb.linearDamping;
+        Vector2 moveStep = velocity * timeStep;
+
+        for (int i = 0; i < steps; i++)
+        {
+            moveStep += gravityAccel;
+            moveStep *= drag;
+            pos += moveStep;
+
+            if (pos.x >= cam.ViewportToWorldPoint(new Vector3(1, 1f)).x)
+            {
+                pos.x = cam.ViewportToWorldPoint(new Vector3(0.9999f, 0.9999f)).x;
+                moveStep.x *= -1;
+            }
+
+            if (pos.x < cam.ViewportToWorldPoint(new Vector3(0, 0f)).x)
+            {
+                pos.x = cam.ViewportToWorldPoint(new Vector3(0f, 0f)).x;
+                moveStep.x *= -1;
+            }
+
+            //-4.56f is ground level
+            if (pos.y <= -4.56f && doGroundBounce == true)
+            {
+                moveStep.y *= -1 * PMaterial2D.bounciness;
+            }
+
+            linePos[i] = pos;
+
+            lineRenderer.SetPosition(i, linePos[i]);
+        }
+    }
+}
+
+```
+
+</details>
+
+<br>
+
+ <td ><img width="512" height="
+" src="AngryBall\Traj.gif"/></td>
