@@ -14,6 +14,149 @@ This project was all about learning Firebase and making something with online ca
 After making a simple angry birds clone i started with the level builder, i began by learning how to save level data in a json format and for that i had to learn how to use Serializable classes that could store multiple variables for me. <br> <br>
  After learning how that works i had to decide what data to store, after much trial and error and thinking i got to storing a Vector4, x and y for position, z for block ID and w for the blocks rotation on 1 axis and i simply made an array for that and stored each block in the level editor in json format. <br>
 
+<td ><img width="512" height="
+" src="AngryBall\Login.gif"/></td>
+
+<details>
+
+<summary> Firebase login code </summary>
+
+``` CSharp
+
+using UnityEngine;
+using Firebase;
+using Firebase.Extensions;
+using Firebase.Auth;
+using TMPro;
+using UnityEngine.SceneManagement;
+
+//this code is stolen from Rasmus and Adam :)
+public class LogInToFirebase : MonoBehaviour
+{
+    FirebaseAuth auth;
+    string emailInput;
+    string passwordInput;
+    [SerializeField] TMP_Text userInfo;
+
+    void Start()
+    {
+        auth = FirebaseAuth.DefaultInstance;
+        FirebaseApp.LogLevel = LogLevel.Debug;
+    }
+
+    public void UpdateEmail(string input)
+    {
+        emailInput = input;
+    }
+
+    public void UpdatePassword(string input)
+    {
+        passwordInput = input;
+    }
+
+    public void Register()
+    {
+        RegisterNewUser(emailInput, passwordInput);
+    }
+
+    private void RegisterNewUser(string email, string password)
+    {
+        Debug.Log("Starting Registration");
+
+        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
+        {
+            if (task.Exception != null)
+            {
+                FirebaseException firebaseEx = task.Exception.GetBaseException() as FirebaseException;
+                AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
+
+                string message = "Register Failed!";
+                switch (errorCode)
+                {
+                    case AuthError.EmailAlreadyInUse:
+                        message = "Email Already in Use";
+                        break;
+                    case AuthError.MissingEmail:
+                        message = "Missing Email";
+                        break;
+                    case AuthError.MissingPassword:
+                        message = "Missing Password";
+                        break;
+                    case AuthError.WeakPassword:
+                        message = "Weak Password";
+                        break;
+                    default:
+                        Debug.LogWarning(task.Exception);
+                        break;
+
+                }
+                userInfo.text = message;
+            }
+            else
+            {
+                FirebaseUser newUser = task.Result.User;
+                Debug.LogFormat("User Registerd: {0} ({1})",
+                  newUser.DisplayName, newUser.UserId);
+                SignIn(email, password);
+            }
+        });
+    }
+
+    public void LogIn()
+    {
+        SignIn(emailInput, passwordInput);
+    }
+
+    private void SignIn(string email, string password)
+    {
+        auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
+        {
+            if (task.Exception != null)
+            {
+                FirebaseException firebaseEx = task.Exception.GetBaseException() as FirebaseException;
+                AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
+
+                string message = "Sign In Failed!";
+                switch (errorCode)
+                {
+                    case AuthError.MissingEmail:
+                        message = "Missing Email";
+                        break;
+                    case AuthError.MissingPassword:
+                        message = "Missing Password";
+                        break;
+                    case AuthError.WrongPassword:
+                        message = "Wrong Password";
+                        break;
+                    case AuthError.UserDisabled:
+                        message = "User Disabled";
+                        break;
+                    case AuthError.Failure:
+                        message = "Failure";
+                        break;
+                    default:
+                        Debug.LogWarning(task.Exception);
+                        break;
+                }
+                userInfo.text = message;
+            }
+            else
+            {
+                FirebaseUser newUser = task.Result.User;
+                Debug.LogFormat("User signed in successfully: {0} ({1})",
+                  newUser.DisplayName, newUser.UserId);
+                userInfo.text = "user logged in: " + newUser.DisplayName;
+                SceneManager.LoadScene("Menu");
+            }
+        });
+    }
+}
+
+```
+
+</details>
+
+<br>
 
 Here is the script on how i handled save data.
 <details>
