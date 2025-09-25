@@ -418,3 +418,10 @@ public class Trajectory : MonoBehaviour
 
  <td ><img width="512" height="
 " src="AngryBall\Traj.gif"/></td>
+
+
+### Final Thoughts
+
+I learnt a lot from making this game, primarily how to save to json and Firebase, i learnt to use object pools and used that for damage numbers and particles. I learn about the cost of physics based simulation compared to just doing simple math.
+
+Also that temporary solutions aren't always temporary (looking at you Bowser).
