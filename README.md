@@ -1,3 +1,15 @@
+## [Gum Slinger 2](https://github.com/sim7234/Portfolio/blob/main/GumSlinger2.md) <-- Click to learn more!
+
+Gumslinger 2 is a mobile game developed by the game studio Itatake, i was an intern there for 6 months and helped make features, fix bugs and refactor code.
+
+## Link to [Itatake and Gumslinger2](https://itatake.com/portfolio/gumslinger-2-ducks-nukes/)
+
+<td ><img width="512" height="" src="Gumslinger2\gs2Splash.png"/></td>
+
+<td ><img width="512" height="" src="Gumslinger2\gs2Gameplay.gif"/></td>
+
+
+
 ## [Signal In Progress](https://github.com/sim7234/Portfolio/blob/main/Signal%20In%20Progress.md) <-- Click to learn more! 
 Signal In Progress is a 3D Horror game where the player is stuck in an abandoned laboratory with lurking monsters that's trying to get in.
 
