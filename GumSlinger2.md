@@ -10,60 +10,90 @@
 
 ## Concepts i have worked with
 
+Some concepts links to an example with code in it or further explaination, otherwise examples are further down.
 
-* ### Systems that support remote controlled balancing and rebalancing once live
+* ### [Systems that support remote controlled balancing and rebalancing once live and timed (de)activation](https://github.com/sim7234/Portfolio/blob/main/Gs2Remote.md)
 
-* ### Refactored existing code with data that was already live and could not be modified
+* ### [Refactored existing code with data that was already live and could not be modified](https://github.com/sim7234/Portfolio/blob/main/Gs2Refactor.md)
 
-* ### Followed code standards and practices of an existing project
+* ### Followed code structure, standards and practices of an existing project
 
-* ### Dynamic UI for any aspect ratio with localization support
+* ### Optimized new features to work for mobile platforms
 
-### Features i have worked on:
+* ### Worked with async, tasks and cancellation tokens
 
-* Animation triggers in gameplay with corresponding sound cues
-
-* A way to gain points from leaderboard and showing it as medals in profile
+* ### [Dynamic UI for any aspect ratio with localization support](https://github.com/sim7234/Portfolio/blob/main/Gs2UI.md)
 
 
+## Code Structure
+
+At Itatake i learnt to follow their best practises and naming conventions, things like always have namespaces, use camelCase for variables that are not static or properties etc. I also adapted my coding style to project specific standards such as utilizing ready made classes that gathers objects instead of using GetComponent or serialization.
+
+Also learnt to use the Service pattern over the Singleton pattern.
+
+
+## Optimization for mobile platforms
+
+I learnt to use Unitys Addressables package to load and unload assets on demand, using this together with Atlases to only have neccesarry sprites loaded at any time.
+
+Some minor coding practices such as caching property access like transform.position to avoid Unity having to convert the access to C++.
+
+Use of lazy initialization so that nothing gets initialized unless its neccesarry.
+
+The use of DateTime instead of timers to comnpare how long something has lasted to avoid unnecesary update loops.
+
+## Async, tasks and cancellation tokens
+
+GS2 required plenty of Async operations, at first i had barrely used async but by the end i was completly comfortable with it, here is a few simple things i learnt.
+
+using functions with async Task to allow a function to be awaitable or run in the background with fire and forget.
+
+Here is an example of me using TaskCompletionSource to navigate UI  
 
 <details>
+<summary>Async outcome task code</summary>
 
-<summary>Animation trigger code snippet</summary>
-
-```CSharp
-private const float CloseHitSqrDistance = 15;
-public bool CloseHit => closeHit && !HitSoftbody;
-
-protected bool closeHit;
-
-
-private void FixedUpdate()
+```CS
+private async Task AwaitOverlayOutomeAsync()
 {
-    if (IsLive && ammo.TargetTransform != null && !CloseHit)
+    while (!token.IsCancellationRequested)
     {
-        var sqrDist = Vector3.SqrMagnitude(transform.position - ammo.TargetTransform.position);
-        if (sqrDist < CloseHitSqrDistance)
+        var source = outcomeSource = new TaskCompletionSource<LeaderboardProfileOutcome>();
+        var outcome = await source.Task;
+        switch (outcome)
         {
-            closeHit = true;
+            case LeaderboardProfileOutcome.None:
+            case LeaderboardProfileOutcome.Canceled:
+                weeklyWidget.ReleaseAssets();
+                break;
+            case LeaderboardProfileOutcome.Back:
+                ViewLocator.Service.Hide<ILeaderboardProfileView>();
+                ViewLocator.Service?.Show<IProfileView>();
+                weeklyWidget.ReleaseAssets();
+                break;
+            case LeaderboardProfileOutcome.Global:
+                SetActiveWidget(globalWidget);
+                SetHightlightedButton(outcome);
+                continue;
+            case LeaderboardProfileOutcome.Local:
+                SetActiveWidget(localWidget);
+                SetHightlightedButton(outcome);
+                continue;
+            case LeaderboardProfileOutcome.Weekly:
+                SetActiveWidget(weeklyWidget);
+                SetHightlightedButton(outcome);
+                continue;
         }
+        break;
     }
-}
- ```
-Then we check before a player starts their turn if the opponents last bullet was a close hit and check if
-we should play a taunt animation to avoid annoying the player we reduce the chance for taunts to be played each time they trigger.
 
-```CSharp
-var rnd = Random.Range(0, 10 - TauntsPlayed);
-var lastBullet = opponent.LastBullet;
-if (rnd >= 5 && lastBullet != null && lastBullet.Projectile.CloseHit)
-    {
-         TauntsPlayed++;
-         await PlayAvatarAnimationAsync(AvatarAnimation.TauntMiss, token);
-     }
- ```
+```
+</details>
 
- Close miss logic was quite simple but playing a hit animation was more difficult, as we want to replace the normal stand up animation with a "Taunt" animation and as softbodies animations uses forces applying them to soon or late would give internal errors for the softbody, effectivly crashing it temporarily which looked of.
- </details>
+## What i have done
 
- <br>
+* Bug fixes, everything from some projectiles not making a sound to softbodies sometimes spawning under ground or getting moved around when they should be stationary, i have worked with a multitude of bug fixes
+
+* I have made a large amount of features, most small some medium sized and a few large scale features.
+
+* Code refactoring, i have refactored plenty of code to restore bugged features, make room for new requirements or just to make a part of the project be easier to work with

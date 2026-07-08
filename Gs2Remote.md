@@ -1,8 +1,10 @@
-# Gumslinger 2 features that work with remote data : [Back](https://github.com/sim7234/Portfolio/blob/main/Gumslinger2.md)
+# Gumslinger 2 example of feature that works with remote : [Back](https://github.com/sim7234/Portfolio/blob/main/Gumslinger2.md)
+
+Some of the features for GS2 required remote controll access, meaning the code i wrote should be able to handle variables that changes from a remote website and then update the feature as needed.
 
 Here is an example of a feature i made that could be remote controlled.
 
-## A medal gain system
+## A medal score system
 
 ### Gumslinger 2 has a leaderboard system with weekly leaderboards, i was tasked with adding medals that you gain by competing in weekly leaderboards. 
 
@@ -18,197 +20,60 @@ Parts of this system is dynamically controlled by a remote data base, here are w
 
 Any code comments are added for this portfolio and are not in the project.
 
-```CS
-public override void OnParentInteractionChanged(bool isEnabled)
-{
-    //this function is called when entering or exiting the weekly leaderboards tab.
-    GameObjectUtils.SafeActivate(xpBar, isEnabled);
-    GameObjectUtils.SafeActivate(scrollRect, isEnabled);
-    GameObjectUtils.SafeActivate(xpText, isEnabled);
-    GameObjectUtils.SafeActivate(medalPointsInfoButton, isEnabled);
-    ToggleInteractions(isEnabled);
-
-    if (isEnabled)
-    {
-        //Here we get existing data for medals and update UI
-        MedalAssetsIndexes.Clear();
-        var medalArray = manager.GetMedalArray();
-        if (firstInteraction)
-        {
-            firstInteraction = false;
-
-            //here we get what medal index you are at from all medals
-            //we also spawn in prefabs of all the medals and one separate prefab for the highlighted medal (the one you are currently at index wise).
-            var currentMedalIndex = Mathf.Clamp(manager.GetCurrentMedalIndex(), 0, manager.GetTotalMedalAmount());
-            var contentTransform = Bindings.Get<Transform>(UiB.Content);
-            var highlightRect = new RectTransform();
-
-            var hasSpawnedHighlight = false;
-            var highlightIndex = 0;
-
-            var totalMedals = manager.GetTotalMedalAmount();
-
-            for (int i = 1; i < totalMedals; i++)
-            {
-                //medalObjects is a list we use to cleanup any gameObjects when we unload later, this is a safety check so we don't spawn objects twice.
-                if (medalObjects.Count > i) break;
-
-                GameObject medal;
-                //check if we are on the last medal or highlighted one and spawn the highlighted prefab, else we spawn normal prefab. 
-                if (i == currentMedalIndex || (i == totalMedals - 1 && !hasSpawnedHighlight && currentMedalIndex != 0))
-                {
-                    hasSpawnedHighlight = true;
-                    highlightIndex = i;
-                    medal = Instantiate(highlightedMedalPrefab, contentTransform);
-                    highlightRect = medal.GetComponent<RectTransform>();
-                }
-                else
-                {
-                    medal = Instantiate(medalPrefab, contentTransform);
-                }
-
-
-                //Update text for each medal to reflect their point requirement
-                var outlinedText = medal.GetComponentInChildren<OutlinedTextField>();
-                outlinedText.text = medalArray[i].ToString();
-
-                //Set a lower alpha and darker color to make a medal show its not unlocked yet.
-                if ((hasSpawnedHighlight && i != highlightIndex && highlightIndex != totalMedals - 1) || currentMedalIndex == 0)
-                {
-                    var image = medal.GetComponent<Image>();
-                    image.color = lockedMedalColor;
-                    outlinedText.SetColor(lockedTextColorBackground, 0);
-                    outlinedText.SetColor(lockedTextColor, 1);
-                }
-                //add gameObject for cleanup later.
-                medalObjects.Add(medal);
-            }
-
-                //load images for each medal with addressables plugin
-                //and then scroll the horizontal scroll bar to the highlighted medal's position.
-                //Code for this function further down.
-            _ = LoadMedalsAndScrollToTarget(highlightRect, highlightIndex, currentMedalIndex > 0);
-        }
-
-        var target = StorageLocator.Service.Progress.LeaderboardProgressManager.GetPercentageTillNextMedal();
-        var medalPoints = manager.GetMedalPoints();
-        var medalPercentage = (float)medalPoints / (float)(manager.GetPointsTillNextMedal() + medalPoints);
-
-
-        var medalTarget = Mathf.Clamp(manager.GetCurrentMedalIndex() + 1, 0, medalArray.Length);
-        if (manager.GetCurrentMedalIndex() >= medalArray.Length - 1)
-        {
-            medalPercentage = 1;
-        }
-
-        //fill the XP bar to t he percentage of the next medal
-        DOVirtual.Float(0, medalPercentage, 3, value =>
-        {
-            currentXpImage.fillAmount = value;
-        });
-
-        var pointsTillNextMedal = medalArray[Mathf.Clamp(manager.GetCurrentMedalIndex() + 1, 0, medalArray.Length - 1)];
-
-        var currentPointsToMedal = manager.GetMedalPoints();
-
-        //Display your points and required point for the next medal
-        DOVirtual.Int(0, currentPointsToMedal, 3, value =>
-        {
-            xpText.text = $"{value} / {pointsTillNextMedal}";
-        });
-    }
-}
-```
 
 ```CS
-private async Task LoadMedalsAndScrollToTarget(RectTransform target, int highlightedIndex, bool scroll)
+private async Task LoadLeaderboardsAsync()
 {
-    //Load all the images with a addressable library and wait for all of them to load
-    var content = scrollRect.content;
+    //Here we get the current time and compare it to the last time we checked leaderboards, we dont want to send updates to often as it is a website call.
+    var timeNow = WorldTime.GetCurrentTime();
+    var progressManager = StorageLocator.Service.Progress.LeaderboardProgressManager;
 
-    var medalArray = manager.GetMedalArray();
-    var loadTasks = new Task[medalArray.Length - 1];
-    for (int i = 0; i < medalArray.Length - 1; i++)
-    {
-        loadTasks[i] = LoadMedalSpriteAsync(medalObjects[i].GetComponent<Image>(), i + 1);
-        MedalAssetsIndexes.Add(i + 1);
-    }
-
-    await Task.WhenAll(loadTasks);
-
-    if (!scroll)
+    if ((timeNow - lastLeaderboardCheck).TotalSeconds < 150 && progressManager.GetBestGlobalPlacement() >= 0)
     {
         return;
     }
 
-    LayoutRebuilder.ForceRebuildLayoutImmediate(content);
+    lastLeaderboardCheck = timeNow;
 
-    Canvas.ForceUpdateCanvases();
+    var localPlayerData = new LeaderboardData();
+    var globalPlayerData = new LeaderboardData();
 
-    var viewport = scrollRect.viewport;
+    localPlayerData = await UgsLeaderboards.GetLocalSplashShotPlayer();
+    globalPlayerData = await UgsLeaderboards.GetSplashShotPlayer();
 
-    //Here we get the world position center of the highlighted medal,
-    //we then get the center of content which is where all the medals are stored
-    //and then we move the position of contents anchored position to the medals center over time.
-
-    var targetWorldCenter = target.TransformPoint(target.rect.center);
-    var targetCenterInContent = content.InverseTransformPoint(targetWorldCenter);
-    var viewportWorldCenter = viewport.TransformPoint(viewport.rect.center);
-    var viewportCenterInContent = content.InverseTransformPoint(viewportWorldCenter);
-    var deltaX = targetCenterInContent.x - viewportCenterInContent.x;
-    var targetX = content.anchoredPosition.x - deltaX;
-    var minX = -(content.rect.width - viewport.rect.width);
-    var maxX = 0;
-
-    targetX = Mathf.Clamp(targetX, minX, maxX);
-
-    DOVirtual.Float(
-        content.anchoredPosition.x,
-        targetX,
-        1f,
-        value =>
-        {
-            content.anchoredPosition = new Vector2(
-                value,
-                content.anchoredPosition.y
-            );
-        }
-    );
+    progressManager.SetPlacements(globalPlayerData.rank + 1, false);
+    progressManager.SetPlacements(localPlayerData.rank + 1, true);
+    progressManager.CheckForNewMedals();
 }
-```
 
-```CS
-private async Task AwaitOverlayOutomeAsync()
+//then we check if the players current points is greater then any required points, this should only happen if medals has been updated by remote as its usually handled elsewhere in a simular way.
+
+ public void CheckForNewMedals()
+ {
+     var points = MyProgress.MedalPoints;
+     for (int i = MyProgress.CurrentMedal; i < PointsToMedalIndex.Length; i++)
+     {
+         if (points >= PointsToMedalIndex[Mathf.Clamp(i + 1, 0, PointsToMedalIndex.Length - 1)])
+         {
+             if (MyProgress.CurrentMedal >= PointsToMedalIndex.Length - 1)
+             {
+                 continue;
+             }
+             MyProgress.CurrentMedal++;
+         }
+     }
+ }
+
+ //where PointsToMedalIndex has all the required data already loaded from remote, and if remote could not be accessed default variables are used instead.
+ private int[] PointsToMedalIndex
 {
-    while (!token.IsCancellationRequested)
+    get
     {
-        var source = outcomeSource = new TaskCompletionSource<LeaderboardProfileOutcome>();
-        var outcome = await source.Task;
-        switch (outcome)
+        if (_pointsToMedalIndex == null)
         {
-            case LeaderboardProfileOutcome.None:
-            case LeaderboardProfileOutcome.Canceled:
-                weeklyWidget.ReleaseAssets();
-                break;
-            case LeaderboardProfileOutcome.Back:
-                ViewLocator.Service.Hide<ILeaderboardProfileView>();
-                ViewLocator.Service?.Show<IProfileView>();
-                weeklyWidget.ReleaseAssets();
-                break;
-            case LeaderboardProfileOutcome.Global:
-                SetActiveWidget(globalWidget);
-                SetHightlightedButton(outcome);
-                continue;
-            case LeaderboardProfileOutcome.Local:
-                SetActiveWidget(localWidget);
-                SetHightlightedButton(outcome);
-                continue;
-            case LeaderboardProfileOutcome.Weekly:
-                SetActiveWidget(weeklyWidget);
-                SetHightlightedButton(outcome);
-                continue;
+            _pointsToMedalIndex = DynamicContentLocator.Service.LeaderboardProfileData.MedalRequirements;
         }
-        break;
+        return _pointsToMedalIndex;
     }
-
+}
 ```
